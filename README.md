@@ -36,7 +36,69 @@ The following two files in the server's current directory will be sent to the Ec
 
 ## Run the EchoKit server
 
+### Option 1: Simple Method (cargo-make)
+
+For quick development and testing, use cargo-make:
+
+```bash
+# Install cargo-make (if not already installed)
+cargo install cargo-make
+
+# Build and start the server in background
+cargo make server
+
+# Check if server is running
+cargo make server-status
+
+# Stop the server
+cargo make server-stop
 ```
+
+**Best for:**
+- Quick development setups
+- Simple process management
+- Teams already using cargo-make
+- Cross-platform development
+
+### Option 2: Advanced Method (just + nohup)
+
+For production-like environments with full process management:
+
+```bash
+# Install just (if not already installed)
+# Ubuntu/Debian: sudo apt install just
+# macOS: brew install just
+# Cargo: cargo install just
+
+# Build and start the server with full management
+just start
+
+# Check detailed server status
+just status
+
+# View live logs
+just logs
+
+# Stop the server gracefully
+just stop
+
+# For development: build, restart and show logs
+just dev
+
+# See all available commands
+just
+```
+
+**Best for:**
+- Production-like environments
+- Long-running servers
+- Detailed logging and monitoring
+- Complete process lifecycle management
+- Development with auto-restart capabilities
+
+### Manual Method
+
+```bash
 export RUST_LOG=debug
 nohup target/release/echokit_server &
 ```
