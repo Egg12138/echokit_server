@@ -50,3 +50,6 @@ tower = { version = "0.5.2", features = ["util"] }
 tower-http = { version = "0.6.1", features = ["fs", "trace"] }
 
 chrono = "0.4.41"
+
+[dev-dependencies]
+cargo-make = "0.37.24"

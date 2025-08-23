@@ -1,0 +1,29 @@
+[env]
+RUST_LOG = "debug"
+
+[tasks.server]
+description = "Build release binary and run server with nohup"
+dependencies = ["build-release"]
+script = [
+    "mkdir -p logs",
+    "nohup target/release/echokit_server > logs/echokit.out.log 2> logs/echokit.err.log &",
+    "echo \"Server started in background\""
+]
+
+[tasks.build-release]
+description = "Build the release binary"
+command = "cargo"
+args = ["build", "--release"]
+
+[tasks.server-stop]
+description = "Stop the running server"
+script = [
+    "pkill -f echokit_server",
+    "echo \"Server stopped\""
+]
+
+[tasks.server-status]
+description = "Check if server is running"
+script = [
+    "pgrep -f echokit_server > /dev/null && echo \"Server is running\" || echo \"Server is not running\""
+]

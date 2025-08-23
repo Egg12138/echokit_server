@@ -1,2 +1,7 @@
 /target
 /record
+/logs/
+nohup.out
+echokit.out.log
+echokit.err.log
+echokit.pid
