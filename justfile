@@ -16,6 +16,7 @@ build-dbg:
 start: build
     mkdir -p logs
     export RUST_LOG=debug
+
     # Start server and capture PID
     nohup target/release/echokit_server > logs/echokit.out.log 2> logs/echokit.err.log &
     # Wait for process to start and get the correct PID
@@ -38,7 +39,7 @@ status:
     fi
 
 
-# Show logs
+
 logs:
     @echo "Ctrl-C to exit."
     @if [ -f logs/echokit.out.log ]; then \

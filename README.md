@@ -69,29 +69,19 @@ For production-like environments with full process management:
 # macOS: brew install just
 # Cargo: cargo install just
 
-# Build and start the server with full management
 just start
 
-# Check detailed server status
 just status
 
-# View live logs
 just logs
 
-# Stop the server gracefully
 just stop
 
-# Build release version
 just build
 
-# Build debug version
 just build-dbg
 
-# Clean build artifacts and generated files (except logs)
 just clean
-
-# See all available commands
-just
 ```
 
 **Best for:**
@@ -99,7 +89,7 @@ just
 - Long-running servers
 - Detailed logging and monitoring
 - Complete process lifecycle management
-- Advanced build and cleanup operations
+- Development with auto-restart capabilities
 
 ## Test on a web page
 

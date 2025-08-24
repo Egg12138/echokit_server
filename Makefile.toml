@@ -11,6 +11,8 @@ script = [
     "sleep 0.5",
     "pgrep -n 'echokit_server' > echokit.pid",
     "echo 'Server started (PID: $(cat echokit.pid))'",
+    "nohup target/release/echokit_server > logs/echokit.out.log 2> logs/echokit.err.log &",
+    "echo \"Server started in background\""
 ]
 
 [tasks.build-release]
@@ -36,3 +38,4 @@ description = "Monitor server log"
 script = [
     "tail -f logs/echokit.out.log"
 ]
+
