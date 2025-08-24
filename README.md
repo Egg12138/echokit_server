@@ -33,31 +33,33 @@ The `hello.wav` file on the server is sent to the EchoKit device when it connect
 
 ## Run the EchoKit server
 
-### Option 1: Simple Method (cargo-make)
+### Option 1: Simple Method (cargo aliases)
 
-For quick development and testing, use cargo-make:
+For quick development and testing, use the convenient cargo aliases:
 
 ```bash
-# Install cargo-make (if not already installed)
-cargo install cargo-make
-
 # Build and start the server in background
-cargo make server
+cargo start
 
 # Check if server is running
-cargo make server-status
+cargo status
+
+# View live logs
+cargo log
 
 # Stop the server
-cargo make server-stop
+cargo stop
 ```
+
+**Note:** These are aliases for cargo-make commands. You can customize the underlying logic by editing `Makefile.toml`.
 
 **Best for:**
 - Quick development setups
 - Simple process management
-- Teams already using cargo-make
 - Cross-platform development
+- Users who prefer standard cargo commands
 
-### Option 2: Advanced Method (just + nohup)
+### Option 2: Advanced Method (just)
 
 For production-like environments with full process management:
 
@@ -79,8 +81,14 @@ just logs
 # Stop the server gracefully
 just stop
 
-# For development: build, restart and show logs
-just dev
+# Build release version
+just build
+
+# Build debug version
+just build-dbg
+
+# Clean build artifacts and generated files (except logs)
+just clean
 
 # See all available commands
 just
@@ -91,14 +99,7 @@ just
 - Long-running servers
 - Detailed logging and monitoring
 - Complete process lifecycle management
-- Development with auto-restart capabilities
-
-### Manual Method
-
-```bash
-export RUST_LOG=debug
-nohup target/release/echokit_server &
-```
+- Advanced build and cleanup operations
 
 ## Test on a web page
 

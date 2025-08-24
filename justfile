@@ -17,7 +17,7 @@ start: build
     mkdir -p logs
     export RUST_LOG=debug
     # Start server and capture PID
-    nohup target/release/echokit_server > logs/echokit.out.log 2>&1 &
+    nohup target/release/echokit_server > logs/echokit.out.log 2> logs/echokit.err.log &
     # Wait for process to start and get the correct PID
     sleep 0.5
     @pgrep -n "echokit_server" > echokit.pid
@@ -40,7 +40,8 @@ status:
 
 # Show logs
 logs:
-    if [ -f logs/echokit.out.log ]; then \
+    @echo "Ctrl-C to exit."
+    @if [ -f logs/echokit.out.log ]; then \
         tail -f logs/echokit.out.log; \
     else \
         echo "No log file found"; \
