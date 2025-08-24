@@ -1,4 +1,4 @@
-addr = "0.0.0.0:8080"
+addr = "0.0.0.0:8081"
 hello_wav = "hello.wav"
 
 # [tts]
@@ -14,7 +14,8 @@ hello_wav = "hello.wav"
 
 [tts]
 platform = "Stable"
-url = "https://0x66b496fba1fdff4237cca9ac597d7171126369c7.gaia.domains/v1/audio/speech"
+# url = "https://0x66b496fba1fdff4237cca9ac597d7171126369c7.gaia.domains/v1/audio/speech"
+url = "http://localhost:8000/v1/audio/speech"
 speaker = "speaker2"
 
 

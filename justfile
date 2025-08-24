@@ -16,9 +16,13 @@ build-dbg:
 start: build
     mkdir -p logs
     export RUST_LOG=debug
-    nohup target/release/echokit_server > logs/echokit.out.log 2>&1 &
-    echo $! > echokit.pid
-    echo "Server started (PID: $!)"
+
+    # Start server and capture PID
+    nohup target/release/echokit_server > logs/echokit.out.log 2> logs/echokit.err.log &
+    # Wait for process to start and get the correct PID
+    sleep 0.5
+    @pgrep -n "echokit_server" > echokit.pid
+    echo "Server started (PID: $(cat echokit.pid))"
 
 # Stop the server
 stop:
@@ -28,15 +32,17 @@ stop:
 
 # Check server status
 status:
-    if [ -f echokit.pid ] && kill -0 $(cat echokit.pid) 2>/dev/null; then \
-        echo "Server running (PID: $(cat echokit.pid))"; \
+    @if pgrep -f echokit_server > /dev/null; then \
+        echo "Server is running"; \
     else \
-        echo "Server not running"; \
+        echo "Server is not running"; \
     fi
 
-# Show logs
+
+
 logs:
-    if [ -f logs/echokit.out.log ]; then \
+    @echo "Ctrl-C to exit."
+    @if [ -f logs/echokit.out.log ]; then \
         tail -f logs/echokit.out.log; \
     else \
         echo "No log file found"; \
